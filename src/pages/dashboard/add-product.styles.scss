@@ -78,10 +78,15 @@
 
   &__body {
     @include body();
+    padding : 10px 0 75px 0;
   }
 
   &__container {
     width: 500px;
+    height: auto;
+    .select__category{
+      margin: 20px 0 ;
+    }
   }
 }
 

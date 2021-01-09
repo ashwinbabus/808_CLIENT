@@ -17,6 +17,8 @@ import AddUrl from "../../components/add-url/addurl.component";
 import Loader from "../../components/loader/loader.component";
 import axios from "axios";
 import {serverUrl} from '../../util'
+import Select from 'react-select';
+const randomize = require('randomatic'); 
 
 function AddProductComponent({ fetchFolders, fetchImages }) {
   const [showAddImageDialogue, setShowAddImage] = useState(false);
@@ -28,7 +30,14 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
     false
   );
 
-  const [sku, setSku] = useState("");
+  const categoryOptions = [
+    {value:"keyboard" , label : "Select category..."},
+    {value: 'keyboard', label: 'keyboard'},
+    {value: 'mouse', label: 'mouse'},
+    {value: 'keycaps', label: 'keycaps'},
+    {value: 'switch', label: 'switch'}
+  ]
+
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
   const [price, setPrice] = useState("");
@@ -103,7 +112,7 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
 
   const saveToDb = () => {
     const data = {
-      sku: parseInt(sku),
+      sku: randomize('A0',7),
       title,
       brand,
       price: parseInt(price),
@@ -208,11 +217,6 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
             <div className="addproduct__form__body">
               <div className="addproduct__form__container">
                 <FormInput
-                  label="SKU"
-                  value={sku}
-                  handleChange={(e) => setSku(e.target.value)}
-                />
-                <FormInput
                   label="Title"
                   value={title}
                   handleChange={(e) => setTitle(e.target.value)}
@@ -227,10 +231,12 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
                   value={price}
                   handleChange={(e) => setPrice(e.target.value)}
                 />
-                <FormInput
-                  label="Category"
-                  value={category}
-                  handleChange={(e) => setCategory(e.target.value)}
+                <Select 
+                  options={categoryOptions}
+                  onChange={(e)=>setCategory(e.value)}
+                  className="select__category"
+                  name="category"
+                  defaultValue={categoryOptions[0]}
                 />
                 <QuillEditor
                   placeholder={"Product description ... "}
