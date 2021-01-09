@@ -16,6 +16,15 @@
       border: none;
     }
   }
+
+  .forgot_password_link{
+    padding: 15px 0 ;
+    color: #0000EE;
+    cursor: pointer;
+    &:hover{
+      text-decoration: underline;
+    }
+  }
 }
 
 .g-sign-in-button {

@@ -13,6 +13,10 @@ const app = firebase.initializeApp({
 export const auth = app.auth();
 export default app;
 
+export const resetPassword = async (email) => {
+ await auth.sendPasswordResetEmail(email);
+}
+
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 googleProvider.setCustomParameters({ promt: "select_account" });
 export const signInWithGoogle = () => auth.signInWithPopup(googleProvider);

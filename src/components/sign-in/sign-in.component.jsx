@@ -8,6 +8,7 @@ import {
 } from "../../redux/user/user.actions";
 
 import "./sign-in.styles.scss";
+import { resetPassword } from "../../firebase/firebase";
 
 const SignIn = ({ signInWithGoogle, signInWithEmail }) => {
   const [email, setEmail] = useState("");
@@ -37,13 +38,33 @@ const SignIn = ({ signInWithGoogle, signInWithEmail }) => {
             onChange={(event) => setPassword(event.target.value)}
           />
         </div>
+        <h4
+          className="forgot_password_link"
+          onClick={async () => {
+            if (!email) {
+              alert("enter an email address");
+            } else {
+              try {
+                await resetPassword(email);
+                alert("check email");
+              } catch (error) {
+                alert(error.message);
+              }
+            }
+          }}
+        >
+          Forgot password ?
+        </h4>
         <div className="sign-in-form-buttons">
           <CustomButton type="submit">LOGIN</CustomButton>
 
           <div className="g-sign-in-button" onClick={() => signInWithGoogle()}>
             <div className="content-wrapper">
               <div className="logo-wrapper">
-                <img src="https://developers.google.com/identity/images/g-logo.png" alt="gsignin" />
+                <img
+                  src="https://developers.google.com/identity/images/g-logo.png"
+                  alt="gsignin"
+                />
               </div>
               <span className="text-container">
                 <span>Sign in with Google</span>
