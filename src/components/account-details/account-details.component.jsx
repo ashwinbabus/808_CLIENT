@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import CustomButton from "../custom-button/custom-button.component";
-
 import FormInput from "../form-input/form-input.component";
 import YourOrdersContainer from "../your-orders/your-orders.container";
-
 import { fetchUserOrdersStart } from "../../redux/orders/orders.actions";
 import { signOutStart } from "../../redux/user/user.actions";
-
 import "./account-details.styles.scss";
 import { createStructuredSelector } from "reselect";
 import { selectMyAccountTab } from "../../redux/my-account/my-account.selectors";
@@ -16,6 +13,7 @@ import { useSpring, animated } from "react-spring";
 import { getAddressStart, resetAddressWhenUserLogsOut } from "../../redux/addresses/address.actions";
 import YourAddressContainer from "../your-addresses/your-addresses.container";
 import { clearCart } from "../../redux/cart/cart.actions";
+import { Link } from 'react-router-dom'
 
 const DashBoardTab = ({ user, logout }) => (
   <div className="dashboard">
@@ -38,6 +36,11 @@ const DashBoardTab = ({ user, logout }) => (
       </p>
       <p>)</p>
     </div>
+    {
+      user.admin ? 
+      <h2 style={{marginBottom : "20px"}}  >You're an admin. you have access to <Link to="/dashboard" >dashboard</Link></h2>
+      :null
+    }
     <p>
       From your account dashboard you can view your recent orders, manage your
       shipping and billing addresses, and edit your password and account
@@ -121,7 +124,7 @@ const AccountDetails = ({ user, fetchOrders, logout , currentTab , setCurrentTab
         <ul>
           <li onClick={() => setCurrentTab("dashboard")}>Dashboard</li>
           <li onClick={() => setCurrentTab("orders")}>Orders</li>
-          <li onClick={() => setCurrentTab("login")}>Security</li>
+          {/* <li onClick={() => setCurrentTab("login")}>Security</li> */}
           <li onClick={() => setCurrentTab("address")}>Addresses</li>
           <li onClick={()=>signOutUser()}>Logout</li>
         </ul>

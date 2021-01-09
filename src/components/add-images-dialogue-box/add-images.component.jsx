@@ -120,7 +120,6 @@ function Upload({
 
   /* component return */
 
-
   return (
     <div className="addimages__background">
       <div className="addimages">
@@ -294,7 +293,11 @@ function Upload({
             <button
               id="add"
               onClick={() => {
-                setUserSelectedImages(selectedImages);
+                if (selectedImages.length) {
+                  setUserSelectedImages(selectedImages);
+                }else{
+                  alert("Please select images")
+                }
                 setShowAddImage(false);
                 fetchFolders("808_STORE");
                 fetchImages("808_STORE");

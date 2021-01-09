@@ -16,9 +16,9 @@ import AddOptionsDialogueBox from "../../components/add-options-diagalogue-box/a
 import AddUrl from "../../components/add-url/addurl.component";
 import Loader from "../../components/loader/loader.component";
 import axios from "axios";
-import {serverUrl} from '../../util'
-import Select from 'react-select';
-const randomize = require('randomatic'); 
+import { serverUrl } from "../../util";
+import Select from "react-select";
+const randomize = require("randomatic");
 
 function AddProductComponent({ fetchFolders, fetchImages }) {
   const [showAddImageDialogue, setShowAddImage] = useState(false);
@@ -31,12 +31,12 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
   );
 
   const categoryOptions = [
-    {value:"keyboard" , label : "Select category..."},
-    {value: 'keyboard', label: 'keyboard'},
-    {value: 'mouse', label: 'mouse'},
-    {value: 'keycaps', label: 'keycaps'},
-    {value: 'switch', label: 'switch'}
-  ]
+    { value: "keyboard", label: "Select category..." },
+    { value: "keyboard", label: "keyboard" },
+    { value: "mouse", label: "mouse" },
+    { value: "keycaps", label: "keycaps" },
+    { value: "switch", label: "switch" },
+  ];
 
   const [title, setTitle] = useState("");
   const [brand, setBrand] = useState("");
@@ -89,9 +89,12 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
           [obj.value]: [],
         };
       });
-      setVariantsArrWithImages([...variantsArrWithImages,{
-        [variant] : objMap
-      }])
+      setVariantsArrWithImages([
+        ...variantsArrWithImages,
+        {
+          [variant]: objMap,
+        },
+      ]);
     }
   };
 
@@ -112,7 +115,7 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
 
   const saveToDb = () => {
     const data = {
-      sku: randomize('A0',7),
+      sku: randomize("A0", 7),
       title,
       brand,
       price: parseInt(price),
@@ -231,9 +234,9 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
                   value={price}
                   handleChange={(e) => setPrice(e.target.value)}
                 />
-                <Select 
+                <Select
                   options={categoryOptions}
-                  onChange={(e)=>setCategory(e.value)}
+                  onChange={(e) => setCategory(e.value)}
                   className="select__category"
                   name="category"
                   defaultValue={categoryOptions[0]}
@@ -311,7 +314,13 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
             </div>
           </div>
           <div className="saveproduct__db">
-            <CustomButton toggle={() => saveToDb()}>SAVE</CustomButton>
+            <CustomButton
+              disabled={!title || !price || !category || !userSelectedImages.length}
+              toggle={() => saveToDb()}
+              style={{ cursor: "pointer" }}
+            >
+              SAVE
+            </CustomButton>
           </div>
         </div>
       )}
