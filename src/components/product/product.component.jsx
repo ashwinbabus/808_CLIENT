@@ -14,7 +14,6 @@ const Product = ({ item, addToCart, toggleCartHidden }) => {
   let history = useHistory();
   const params = useParams();
   const goToProduct = (sku, category) => {
-    console.log("params :: ",params);
     _.isEmpty(params)
       ? history.push(`shop/${category}/${sku}`)
       : history.push(`${category}/${sku}`);
@@ -53,7 +52,7 @@ const Product = ({ item, addToCart, toggleCartHidden }) => {
           className="product__image"
           publicId = {item.images[0]}
           cloudName = "ashwin808"
-          height = "200"
+          
           onClick={() => goToProduct(item.sku, item.category)}
         />
       </div>
@@ -72,7 +71,7 @@ const Product = ({ item, addToCart, toggleCartHidden }) => {
           Select Options
         </CustomButton>
       ) : (
-        <CustomButton inverted toggle={() => handleAddToCart(item)}>
+        <CustomButton  inverted toggle={() => handleAddToCart(item)}>
           Add to cart
         </CustomButton>
       )}

@@ -6,16 +6,17 @@
   width: 95%;
   margin: 25px auto;
 
-  &__grid{
-    margin : 0 0 100px 0;
+  &__grid {
+    margin: 0 0 100px 0;
+    display: grid;
+    column-gap: 25px;
+    row-gap: 25px;
   }
 }
 
-@media (min-width: 481px) {
+@media (min-width: 768px) {
   .collectionpage {
     &__grid {
-      display: grid;
-      column-gap: 25px;
       grid-template-columns: 1fr 1fr;
       align-items: center;
       justify-content: center;
@@ -24,10 +25,18 @@
   }
 }
 
-
-@media (min-width: 900px) {
+@media (min-width: 1150px) {
   .collectionpage {
-    width: 70%;
+    margin: 75px auto;
+    &__grid {
+      grid-template-columns: 1fr 1fr 1fr;
+      row-gap: 25px;
+    }
+  }
+}
+
+@media (min-width: 1500px) {
+  .collectionpage {
     margin: 75px auto;
     &__grid {
       grid-template-columns: 1fr 1fr 1fr 1fr;

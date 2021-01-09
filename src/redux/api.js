@@ -54,7 +54,6 @@ export const deleteAddress = async(_id) => {
 }
 
 export const editAddress = async(data) => {
-  console.log("api update data ",data);
   axios.put(`${serverUrl}/address`,data)
 }
 
@@ -88,7 +87,6 @@ export const getFolders = async (path) => {
 };
 
 export const getImages = async (path) => {
-  console.log("image api path ",path);
   const response = await axios.get(`${serverUrl}/files/images/`, {
     params: { path },
   });

@@ -21,7 +21,6 @@ const AddAddressForm = ({
   postAddress,
   modifyAddressArray,
 }) => {
-  console.log("userid to add address ", userId);
   const states = [
     "Select",
     "Andhra Pradesh",
@@ -91,7 +90,6 @@ const AddAddressForm = ({
   const handleSubmit = (event) => {
     event.preventDefault();
     if (isEditing) {
-      console.log("handle submit tempaddr", tempAddr);
       editAddress(tempAddr);
       modifyAddressArray(tempAddr);
     } else {

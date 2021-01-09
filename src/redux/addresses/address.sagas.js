@@ -26,7 +26,6 @@ function* onPostAddressStart() {
 }
 
 function* getAddressesSaga({ payload }) {
-  console.log("get address userId ", payload);
   try {
     const addresses = yield getAddresses(payload);
     yield put(getAddressSuccess(addresses));
@@ -57,7 +56,6 @@ function* onDeleteAddressStart() {
 }
 
 function* updateAddress({payload}){
-  console.log("saga payload ",payload);
   try {
     yield editAddress(payload)
     yield put(updateAddressSuccess())

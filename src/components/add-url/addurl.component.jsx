@@ -56,7 +56,6 @@ export default function AddUrl({
       (obj) => Object.keys(obj)[0] === selectedOption
     );
     if (index < 0) {
-      console.log("if block executed");
       optionImageObj = {
         [selectedOption]: tempImagesArr,
       };
@@ -90,7 +89,6 @@ export default function AddUrl({
 
   const apply = () => {
     hideMe(false);
-    console.log();
     let tempVwIARR = variantsArrWithImages;
     let index = tempVwIARR.findIndex(
       (variant) => Object.keys(variant)[0] === currentVariant
@@ -99,7 +97,6 @@ export default function AddUrl({
       [currentVariant]: [...optionImagesArr],
     };
 
-    console.log("option images :::::: " , optionImagesArr);
     setVariantsArrWithImages(tempVwIARR);
 
     // if(!Object.keys(Object.assign({},...variantsArrWithImages)).includes(currentVariant)){

@@ -26,9 +26,22 @@
 
   &__information {
     padding: 25px;
-    h1 {
+    h1,h3 {
       text-transform: uppercase;
+      padding: 20px 0;
     }
+  }
+
+  &__select{
+    display: flex;
+    flex-direction: column;
+    padding: 25px 0;
+    label{
+      padding: 5px;
+    }
+  }
+  select{
+    padding: 5px;
   }
 
   &__description {
@@ -38,10 +51,11 @@
   &__quantity {
     input {
       padding: 10px;
-      margin-right: 10px;
     }
     button{
       border-radius: 5px;
+      width: 50%;
+      margin: 10px;
     }
   }
 }

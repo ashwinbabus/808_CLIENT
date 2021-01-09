@@ -42,9 +42,9 @@ export const googleSignInStart = () => ({
     payload: userCredentials
   });
   
-  export const signUpSuccess = ({ user, additionalData }) => ({
+  export const signUpSuccess = (data) => ({
     type: UserActionTypes.SIGN_UP_SUCCESS,
-    payload: { user, additionalData }
+    payload: data
   });
   
   export const signUpFailure = error => ({

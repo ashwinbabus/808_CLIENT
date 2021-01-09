@@ -109,7 +109,6 @@ const ProductInformation = ({ product_data, addToCart, toggleCartHidden }) => {
                   >
                     <option disabled selected value> -- select an option -- </option>
                     {Object.values(variant).map((obj) => {
-                      console.log("variant obj ", obj);
                       return obj.map((item, index) => (
                         <option key={index}>{Object.keys(item)[0]}</option>
                       ));

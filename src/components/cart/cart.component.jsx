@@ -90,7 +90,6 @@ const Cart = ({
                           height="120"
                           className="cart-item-image"
                         />
-                        {console.log("cartitemmmmmm ::: ", cartItem)}
                         <div className="cart-item-details">
                           <p>
                             {cartItem.brand} {cartItem.title}

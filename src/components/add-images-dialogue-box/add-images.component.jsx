@@ -99,7 +99,6 @@ function Upload({
   };
 
   const selectImages = (image, e) => {
-    console.log(image);
     if (selectedImages.includes(image)) {
       const filteredArr = selectedImages.filter((img) => img !== image);
       setSelectedImages(filteredArr);
@@ -121,7 +120,6 @@ function Upload({
 
   /* component return */
 
-  console.log("current folder ", currentFolder);
 
   return (
     <div className="addimages__background">
@@ -224,7 +222,6 @@ function Upload({
                       if (selectedFolder.name === folder.name) {
                         setSelectedFolder({});
                       } else {
-                        console.log(folder);
                         setSelectedFolder(folder);
                       }
                     }}

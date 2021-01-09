@@ -2,41 +2,34 @@ import { takeLatest, put, all, call } from "redux-saga/effects";
 
 // import UserActionTypes from './user.types';
 
-import UserActionTypes from './user.action-types';
+import UserActionTypes from "./user.action-types";
 
 import {
   signInSuccess,
   signInFailure,
   signOutSuccess,
   signOutFailure,
-  signUpSuccess,
   signUpFailure,
 } from "./user.actions";
 
-import {
-  auth,
-  googleProvider,
-} from "../../firebase/firebase";
+import { auth, googleProvider } from "../../firebase/firebase";
 import { getUserFromMongo, saveUserToMongo } from "../api";
 
-
-export function* getUserFromMongoSaga(firebase_uid){
+export function* getUserFromMongoSaga(firebase_uid) {
   const user = yield getUserFromMongo(firebase_uid);
   yield put(signInSuccess(user));
 }
 
-export function* saveUserToMongoSaga(firebase_uid,displayName,email){
-  const user = yield saveUserToMongo({firebase_uid,displayName,email});
-  console.log("user received ",user);
-    yield put(signInSuccess(user))
+export function* saveUserToMongoSaga(firebase_uid, displayName, email) {
+  const user = yield saveUserToMongo({ firebase_uid, displayName, email });
+  yield put(signInSuccess(user));
 }
-
 
 export function* signInWithGoogle() {
   try {
     const { user } = yield auth.signInWithPopup(googleProvider);
-    const {uid,displayName,email} = user;
-    yield saveUserToMongoSaga(uid,displayName,email);
+    const { uid, displayName, email } = user;
+    yield saveUserToMongoSaga(uid, displayName, email);
   } catch (error) {
     yield put(signInFailure(error));
   }
@@ -44,13 +37,12 @@ export function* signInWithGoogle() {
 
 export function* signInWithEmail({ payload: { email, password } }) {
   try {
-       const { user } = yield auth.signInWithEmailAndPassword(email, password);
+    const { user } = yield auth.signInWithEmailAndPassword(email, password);
     yield getUserFromMongoSaga(user.uid);
   } catch (error) {
     yield put(signInFailure(error));
   }
 }
-
 
 export function* signOut() {
   try {
@@ -64,18 +56,18 @@ export function* signOut() {
 export function* signUp({ payload: { email, password, displayName } }) {
   try {
     const { user } = yield auth.createUserWithEmailAndPassword(email, password);
-    yield put(signUpSuccess({firebase_uid:user.uid,email:user.email,displayName}))
+    yield saveUserToMongoSaga(user.uid, displayName , user.email);
   } catch (error) {
     yield put(signUpFailure(error));
   }
 }
 
-export function* checkUser({payload}){
+export function* checkUser({ payload }) {
   yield getUserFromMongoSaga(payload);
 }
 
-export function* onCheckUserSession(){
-  yield takeLatest(UserActionTypes.CHECK_USER_SESSION,checkUser)
+export function* onCheckUserSession() {
+  yield takeLatest(UserActionTypes.CHECK_USER_SESSION, checkUser);
 }
 
 export function* onGoogleSignInStart() {
@@ -94,17 +86,12 @@ export function* onSignUpStart() {
   yield takeLatest(UserActionTypes.SIGN_UP_START, signUp);
 }
 
-export function* onSignUpSuccess() {
-  yield takeLatest(UserActionTypes.SIGN_UP_SUCCESS, saveUserToMongoSaga);
-}
-
 export function* userSagas() {
   yield all([
     call(onGoogleSignInStart),
     call(onEmailSignInStart),
     call(onSignOutStart),
     call(onSignUpStart),
-    call(onSignUpSuccess),
-    call(onCheckUserSession)
+    call(onCheckUserSession),
   ]);
 }

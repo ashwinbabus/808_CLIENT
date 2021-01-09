@@ -47,7 +47,6 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
   const [value, setValue] = useState([]);
 
   const setUserImagesHandler = (imagesArr) => {
-    console.log("image handler fired");
     const filteredArray = imagesArr.filter(
       (image) => !userSelectedImages.includes(image)
     );

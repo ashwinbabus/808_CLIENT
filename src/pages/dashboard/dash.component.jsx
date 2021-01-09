@@ -4,43 +4,47 @@ import { formatter } from "../../util";
 import Axios from "axios";
 import CustomButton from "../../components/custom-button/custom-button.component";
 import AddProductComponent from "./add-product.component";
-import Loader from '../../components/loader/loader.component';
-import {Image} from 'cloudinary-react';
-import {serverUrl} from '../../util';
+import Loader from "../../components/loader/loader.component";
+import { Image } from "cloudinary-react";
+import { serverUrl } from "../../util";
+import { useHistory } from "react-router-dom";
 
 export default function Dash() {
-  const[isFetchingProducts,setIsFetchingProducts] = useState(false);
+  const [isFetchingProducts, setIsFetchingProducts] = useState(false);
   useEffect(() => {
     setIsFetchingProducts(true);
     const fetchData = () => {
-      Axios.get(`${serverUrl}/products/`)
-      .then(res => {
+      Axios.get(`${serverUrl}/products/`).then((res) => {
         setIsFetchingProducts(false);
-        setProducts(res.data)
-      })
+        setProducts(res.data);
+      });
     };
     fetchData();
   }, []);
 
   const [products, setProducts] = useState([]);
   const [isAddingProduct, setIsAddingProduct] = useState(false);
-  console.log(products);
+  const history = useHistory();
 
   return (
     <div className="dash">
       <div className="dash__left">
-        <div className="goback" onClick={() => setIsAddingProduct(false)}>
-          <img src="https://img.icons8.com/bubbles/50/000000/back.png" alt="back" />
-          <h1>BACK</h1>
+        <div className="goback" >
+          <img
+            src="https://img.icons8.com/bubbles/50/000000/back.png"
+            alt="back"
+            onClick={() =>
+              isAddingProduct ? setIsAddingProduct(false) : history.push("/")
+            }
+          />
+          {isAddingProduct ? <h1 onClick={() => setIsAddingProduct(false)} >BACK</h1> : <h1 onClick={() => history.push("/")} >HOME</h1>}
         </div>
       </div>
 
       <div className="dash__right">
-        
-        {
-        isFetchingProducts ? 
-        <Loader /> :
-        isAddingProduct ? (
+        {isFetchingProducts ? (
+          <Loader />
+        ) : isAddingProduct ? (
           <AddProductComponent />
         ) : (
           <div className="dash__right__container">
@@ -62,10 +66,14 @@ export default function Dash() {
             </div>
             <div className="dash__product__container">
               {products && products.length
-                ? products.map((product,index) => (
+                ? products.map((product, index) => (
                     <div className="dash__product" key={index}>
                       <div className="image_and_title firstCol">
-                        <Image publicId={product.images[0]} cloudName="ashwin808" height="45" />
+                        <Image
+                          publicId={product.images[0]}
+                          cloudName="ashwin808"
+                          height="45"
+                        />
                         <h6>{product.title}</h6>
                       </div>
                       <h6 className="secondCol">{product.category}</h6>

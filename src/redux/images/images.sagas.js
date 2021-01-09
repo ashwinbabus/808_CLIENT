@@ -11,7 +11,6 @@ function* onFetchFoldersStart () {
 }
 
 function* fetchFolders({payload}){
-    console.log(payload);
     try{
         const folders = yield getFolders(payload);
         yield put(fetchFoldersSuccess(folders))
@@ -28,7 +27,6 @@ function* onFetchImagesStart(){
 }
 
 function* fetchRootImages({payload}){
-    console.log("image saga payload ",payload);
     try {
         const images = yield getImages(payload);
         yield put(fetchImagesSuccess(images))
