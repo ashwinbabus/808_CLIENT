@@ -12,9 +12,11 @@ export const selectIsDataFetching = createSelector(
 );
 
 export const selectProduct = (productSkuParam) =>
-  createSelector([selectShopData], (SHOP_DATA) =>
+  createSelector(
+    [selectShopData], 
+    (SHOP_DATA) =>
     SHOP_DATA
-      ? SHOP_DATA.filter((item) => item.sku === parseInt(productSkuParam))
+      ? SHOP_DATA.filter((item) => item.sku === productSkuParam)
       : []
   );
 

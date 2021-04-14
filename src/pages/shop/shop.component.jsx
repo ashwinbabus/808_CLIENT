@@ -33,7 +33,6 @@ export const Shop = ({ match, fetchDataStart }) => {
         render={(props) => <ProductCollectionContainer  {...props} key={uuid()} />} 
       />
       <Route
-        exact
         path={`${match.path}/:category/:product`}
         component={ProductPage}
       />

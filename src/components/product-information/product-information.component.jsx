@@ -5,11 +5,12 @@ import { Link, useParams } from "react-router-dom";
 
 import CustomButton from "../../components/custom-button/custom-button.component";
 import { addItemToCart, toggleCartHidden } from "../../redux/cart/cart.actions";
-import { selectProduct } from "../../redux/shop/shop.selector";
+import { selectProduct} from "../../redux/shop/shop.selector";
 
 import "./product-information.styles.scss";
 
-const ProductInformation = ({ product_data, addToCart, toggleCartHidden }) => {
+const ProductInformation = ({ product_data, addToCart, toggleCartHidden}) => {
+
   const product = product_data[0];
 
   const [currentImage, setCurrentImage] = useState(product.images[0]);
