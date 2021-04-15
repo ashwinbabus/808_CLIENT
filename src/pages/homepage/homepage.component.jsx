@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useCallback } from "react";
 import Slides from "../../components/slides/slides.component";
 import Header from "../../components/header/header.component";
 import { ReactComponent as KeyboardIcon } from "../../assets/product_icon.svg";
@@ -7,19 +7,20 @@ import "./homepage.styles.scss";
 import { Link, useHistory } from "react-router-dom";
 
 const Homepage = () => {
-  const [slideProperties, setSlideProperties] = useState(slides_data[0]);
-  const [count, setCount] = useState(0);
+  
+  const[index,setIndex] = useState(0);
+
   const [headerBg, setHeaderBg] = useState(false);
 
   const history = useHistory();
 
-  useEffect(() => {
-    setSlideProperties(slides_data[count]);
-  }, [count]);
 
-  useEffect(() => {
+ useEffect(() => {
     window.addEventListener("scroll", handleScroll);
   });
+
+
+
 
   const handleScroll = (event) => {
     if (event.srcElement.scrollingElement.scrollTop >= 100) {
@@ -29,38 +30,49 @@ const Homepage = () => {
     }
   };
 
-  const setCurrentSlide = (dir) => {
+  const set_index = useCallback((dir) => {
     if (dir === 1) {
-      setCount((count + 1) % slides_data.length);
+      setIndex((index + 1) % slides_data.length);
     } else {
-      if (count === 0) {
-        setCount(slides_data.length - 1);
+      if (index === 0) {
+        setIndex(slides_data.length - 1);
       } else {
-        setCount(count - 1);
+        setIndex(index - 1);
       }
     }
-  };
+  },[index])
 
+  
+  useEffect(() => {
+    let id = setInterval(() => set_index(1),5000)
+    return () => {
+      clearInterval(id);
+    }
+  },[set_index])
+
+  
+
+  
   return (
     <div className="homepage-container">
       <Header transparent background={headerBg} />
       <div className="homepage-slides-container">
-        <Slides slideProperties={slideProperties} />
+        <Slides index={index} />
         <div
           className="direction-nav direction-nav-prev"
-          onClick={() => setCurrentSlide(2)}
+          onClick={() => set_index(2)}
         />
         <div
           className="direction-nav direction-nav-next"
-          onClick={() => setCurrentSlide(1)}
+          onClick={() => set_index(1)}
         />
         <div className="slider-dots-container">
-          {slides_data.map((slide, index) => {
+          {slides_data.map((slide, ind) => {
             return (
               <div
-                className={`dot ${count === index ? "active" : ""}`}
-                onClick={() => setCount(index)}
-                key={index}
+                className={`dot ${ind === index ? "active" : ""}`}
+                onClick={() => set_index(ind)}
+                key={ind}
               />
             );
           })}
