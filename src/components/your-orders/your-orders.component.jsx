@@ -11,8 +11,10 @@ function YourOrders({ orders }) {
 
   return (
     <div>
-      <table className="yourorders__table">
-        <thead>
+      {
+        orders && orders.length? 
+        <table className="yourorders__table">
+            <thead>
           <tr>
             <td>DATE</td>
             <td>ORDER ID</td>
@@ -33,6 +35,9 @@ function YourOrders({ orders }) {
             : null}
         </tbody>
       </table>
+      : <h1>There are no orders to display</h1>
+      }
+      
     </div>
   );
 }

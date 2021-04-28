@@ -38,13 +38,12 @@ const DashBoardTab = ({ user, logout }) => (
     </div>
     {
       user.admin ? 
-      <h2 style={{marginBottom : "20px"}}  >You're an admin. you have access to <Link to="/dashboard" >dashboard</Link></h2>
+      <h2 style={{marginBottom : "20px"}}  >You're an admin. you have access to the <Link to="/dashboard" >dashboard</Link></h2>
       :null
     }
     <p>
       From your account dashboard you can view your recent orders, manage your
-      shipping and billing addresses, and edit your password and account
-      details.
+      shipping and billing addresses.
     </p>
   </div>
 );

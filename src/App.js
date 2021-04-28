@@ -12,6 +12,7 @@ import ThankYou from "./components/thank-you/thank-you.component";
 import Dash from "./pages/dashboard/dash.component";
 import { auth } from "./firebase/firebase";
 import { checkUserSession } from "./redux/user/user.actions";
+import PNF from "./pages/page-not-found/pnf.page";
 
 function App({ signInUser }) {
   useEffect(() => {
@@ -26,13 +27,32 @@ function App({ signInUser }) {
   }, [signInUser]);
   return (
     <div className="App">
-      <ProtectedRoute exact path={process.env.PUBLIC_URL + "/dashboard"} component={Dash} />
       <Switch>
+        <ProtectedRoute
+          exact
+          path={process.env.PUBLIC_URL + "/dashboard"}
+          component={Dash}
+        />
         <Route path={process.env.PUBLIC_URL + "/shop"} component={Shop} />
         <Route exact path={process.env.PUBLIC_URL + "/"} component={Homepage} />
-        <Route exact path={process.env.PUBLIC_URL + "/my-account"} component={MyAccount} />
-        <Route exact path={process.env.PUBLIC_URL + "/cart"} component={CartPage} />
-        <Route exact path={process.env.PUBLIC_URL + "/order-success"} component={ThankYou} />
+        <Route
+          exact
+          path={process.env.PUBLIC_URL + "/my-account"}
+          component={MyAccount}
+        />
+        <Route
+          exact
+          path={process.env.PUBLIC_URL + "/cart"}
+          component={CartPage}
+        />
+        <Route
+          exact
+          path={process.env.PUBLIC_URL + "/order-success"}
+          component={ThankYou}
+        />
+        <Route>
+          <PNF />
+        </Route>
       </Switch>
       <Cart />
     </div>
