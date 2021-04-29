@@ -1,5 +1,12 @@
 .my-account-page{
   height: 100vh;
+  h1{
+    font-weight: bold;
+    margin-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .my-account-title {

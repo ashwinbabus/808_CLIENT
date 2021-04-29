@@ -20,6 +20,7 @@ const MyAccount = ({ user }) => {
         <hr />
       </div>
       {user ? <AccountDetails user={user} /> : <SignInSignUp />}
+      <h1>Login using : ashwinbabus21@gmail.com , password : adminpassword to access the dashboard where you can view and add products</h1>
     </div>
   );
 };
