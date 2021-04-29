@@ -295,7 +295,7 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
                           className="delete-icon"
                           onClick={() => deleteVariant(index)}
                         >
-                          <DeleteIcon />
+                          <DeleteIcon title="delete"/>
                         </div>
                       </div>
                     ))
