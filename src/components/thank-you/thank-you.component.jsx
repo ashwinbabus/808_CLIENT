@@ -12,7 +12,7 @@ export default function ThankYou() {
       </h1>
       <Link to="/shop/">
         {" "}
-        <h3 className="thankyou_continueshop">Continue shopping</h3>
+        <h3 className="thankyou__continueshop">Continue shopping</h3>
       </Link>
     </div>
   );

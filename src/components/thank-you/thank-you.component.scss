@@ -1,9 +1,19 @@
 .thankyou{
     &__container{
+        height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: column;
         text-align: center;
+    }
+    &__title{
+        margin: 50px;
+        font-size: 64px;
+        line-height: 1.5;
+    }
+
+    &__continueshop{
+        font-size: 48px;
     }
 }

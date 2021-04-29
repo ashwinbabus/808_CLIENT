@@ -75,16 +75,18 @@ const CartPage = ({ user, cartItems, total }) => {
           </div>
 
           <div className="cartpage__checkout"  >
-            <h1 className="credit__card">
-              {" "}
-              Use this card number with any CVV and an exipiry date in the
-              future : 4242 4242 4242 4242{" "}
-            </h1>
 
             <CustomButton toggle={() => setShowAddresses(true)}>
               {" "}
               {"Checkout " + formatter.format(total)}
             </CustomButton>
+            <h1 className="credit__card" style={{
+              marginTop : "20px"
+            }}>
+              {" "}
+              Card number : 4242 4242 4242 4242 | CVV : 123  | Expiry date : 12/25{" "}
+            </h1>
+
           </div>
         </div>
         {transition.map(

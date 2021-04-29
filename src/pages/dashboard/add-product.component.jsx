@@ -301,10 +301,10 @@ function AddProductComponent({ fetchFolders, fetchImages }) {
                     ))
                   : null}
                 {variantsArr.length <= 0 && (
-                  <h6>
+                  <h4>
                     Does your product come in different options, like Size,
                     Color or Material? Add them here.
-                  </h6>
+                  </h4>
                 )}
                 <CustomButton toggle={() => setIsOptionsDialogueBoxOpen(true)}>
                   {" "}
